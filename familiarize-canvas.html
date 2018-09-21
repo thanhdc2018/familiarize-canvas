@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="600" height="300"
+        style="border:1px solid #000000;">
+    </canvas>
+
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    // ctx.translate((canvas.width)/2,(canvas.height)/2);
+
+    //rec
+    // function draw(a){
+    //     ctx.fillStyle = "#FF0000";
+    //     ctx.rotate(a*Math.PI/180);
+    //     // ctx.fillRect(((150 - canvas.width)/2),((75 -canvas.height)/2),150,75);
+    //     ctx.fillRect(-75,-32.5,150,75);
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // }
+
+
+    // }
+    // function drawrotate(){
+    //     for (let i = 0; i < 360;){
+    //         draw(i);
+    //         setTimeout(function(){
+    //
+    //         },500);
+    //         i +=5;
+    //     }
+    // }
+    // setInterval(drawrotate(),1000);
+
+    // //line
+    // ctx.strokeStyle = "#fff706";
+    // ctx.lineWidth = 5;
+    // ctx.moveTo(0,0);
+    // ctx.lineTo(600,300);
+    // ctx.stroke();
+    //
+    //
+    // //cicle
+    //
+    // ctx.beginPath();
+    // ctx.arc((600)/2,(300)/2,60,0,2*Math.PI);
+    // ctx.stroke();
+
+
+    //
+    // let a = 0;
+    // draw(a);
+
+    let Rect = function (x, y, a, b, alpha, color){
+    this.x = x || canvas.width/2;
+    this.y = y || canvas.height/2;
+    this.a = a || 75;
+    this.b = b || 75;
+    this.alpha = alpha || 0;
+    this.color = color || "#ff0000"
+    }
+
+    let rect = new Rect(canvas.width/2,canvas.height/2,20,100,0,"red");
+
+    let rects = [new Rect(),new Rect(),new Rect(),new Rect()];
+
+
+
+    function drawRect(){
+        //let ctx = canvas.getContext("2d");
+        ctx.fillStyle = rect.color;
+        ctx.save();
+        ctx.translate(rect.x+rect.a/2, rect.y+rect.b/2);
+        ctx.rotate(rect.alpha*Math.PI/180);
+        if ( rect.alpha == 360){
+            rect.alpha = 0;
+        }
+        rect.alpha += 10;
+        ctx.translate(-rect.a/2,-rect.b/2)
+        ctx.fillRect(0,0,rect.a,rect.b);
+        ctx.restore();
+        }
+
+     function animation(){
+         ctx.clearRect(0, 0, canvas.width, canvas.height);
+         drawRect();
+         console.log("Hello");
+     }
+
+    setInterval(function() {animation()}, 20);// vẽ liên tục
+
+</script>
+
+</body>
+</html>
